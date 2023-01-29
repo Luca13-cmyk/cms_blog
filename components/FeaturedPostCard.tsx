@@ -23,14 +23,14 @@ const FeaturedPostCard = ({ post }: IProps) => (
         {post.title}
       </p>
       <div className="flex items-center absolute bottom-5 w-full justify-center">
-        <Image
-          unoptimized
-          alt={post.author.name}
-          height={30}
-          width={30}
-          className="align-middle drop-shadow-lg rounded-full"
-          src={post.author.photo.url}
-        />
+        <div className="relative  w-[40px] h-[40px] rounded-full">
+          <Image
+            alt={post.author.name}
+            fill
+            className="object-cover bg-center drop-shadow-lg rounded-full"
+            src={post.author.photo.url}
+          />
+        </div>
         <p className="inline align-middle text-white text-shadow ml-2 font-medium">
           {post.author.name}
         </p>

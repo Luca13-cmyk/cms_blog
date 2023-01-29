@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 
 import { getCategories, getCategoryPost } from "../../services";
-import { PostCard, Categories, Loader } from "../../components";
+import { PostCard, Categories, Loader, Pagination } from "../../components";
+import Post from "../../model/Post";
 
 interface IProps {
-  posts: any;
+  posts: { node: Post }[];
 }
 
 const CategoryPost = ({ posts }: IProps) => {
@@ -15,16 +16,37 @@ const CategoryPost = ({ posts }: IProps) => {
     return <Loader />;
   }
 
+  // pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 2;
+
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+
+  const paginate = (event: React.ChangeEvent<unknown>, value: number) => {
+    setCurrentPage(value);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
-    <div className="container mx-auto px-10 mb-8">
+    <div className="container mx-auto sm:px-1 md:px-10 mb-8">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
         <div className="col-span-1 lg:col-span-8">
-          {posts.map((post: any, index: number) => (
-            <PostCard key={index} post={post.node} />
+          {currentPosts.map((data: { node: Post }, index: number) => (
+            <PostCard key={index} post={data.node} />
           ))}
         </div>
         <div className="col-span-1 lg:col-span-4">
           <div className="relative lg:sticky top-8">
+            {posts.length > postsPerPage && (
+              <Pagination
+                posts={posts}
+                currentPage={currentPage}
+                paginate={paginate}
+                postsPerPage={postsPerPage}
+              />
+            )}
             <Categories />
           </div>
         </div>

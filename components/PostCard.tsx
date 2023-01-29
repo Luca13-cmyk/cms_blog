@@ -28,7 +28,9 @@ function PostCard({ post }: IProps) {
               src={post.author.photo.url}
               fill
               alt={post.author.name}
-              className=" absolute  rounded-full"
+              className="object-cover absolute  rounded-full"
+              // blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADA..."
+              // placeholder="blur"
             />
           </div>
           <p className="inline align-middle text-gray-700 ml-2 text-lg">

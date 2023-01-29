@@ -90,14 +90,14 @@ function PostDetail({ post }: IProps) {
           />
         </div>
         <div className="px-4 lg:px-0">
-          <div className="flex items-center mb-8 w-full">
+          <div className="flex items-center my-8 w-full">
             <div className="flex items-center mb-4 lg:mb-0 w-full lg:w-auto mr-8">
               <div className="w-[40px] h-[40px] relative">
                 <Image
                   src={post.author.photo.url}
                   fill
                   alt={post.author.name}
-                  className=" absolute  rounded-full"
+                  className="object-cover absolute  rounded-full"
                 />
               </div>
               <p className="inline align-middle text-gray-700 ml-2 text-lg">
