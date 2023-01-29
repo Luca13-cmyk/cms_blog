@@ -30,14 +30,40 @@ function PostDetail({ post }: IProps) {
       }
       if (obj.href) {
         modifiedText = (
-          <a key={index} target={obj.openInNewTab && "_blank"} href={obj.href}>
-            {obj.title}
+          <a
+            className="underline text-xl"
+            key={index}
+            target={obj.openInNewTab && "_blank"}
+            href={obj.href}
+          >
+            {obj.children[0].text || obj.children[0].title}
           </a>
         );
       }
     }
 
     switch (type) {
+      case "code-block":
+        return (
+          <div
+            key={index}
+            className="bg-gray-100 p-4 w-full rounded-md whitespace-pre select-all my-4"
+          >
+            <p className="text-gray-800 antialiased font-light text-lg font-serif">
+              {modifiedText.map((item: any, i: number) => (
+                <React.Fragment key={i}>{item}</React.Fragment>
+              ))}
+            </p>
+          </div>
+        );
+      case "heading-two":
+        return (
+          <h2 key={index} className="text-xl font-semibold mb-4">
+            {modifiedText.map((item: any, i: number) => (
+              <React.Fragment key={i}>{item}</React.Fragment>
+            ))}
+          </h2>
+        );
       case "heading-three":
         return (
           <h3 key={index} className="text-xl font-semibold mb-4">
@@ -48,7 +74,10 @@ function PostDetail({ post }: IProps) {
         );
       case "paragraph":
         return (
-          <p key={index} className="mb-8">
+          <p
+            key={index}
+            className="mb-8 mt-2 text-gray-800 antialiased font-light text-lg font-serif"
+          >
             {modifiedText.map((item: any, i: number) => (
               <React.Fragment key={i}>{item}</React.Fragment>
             ))}
