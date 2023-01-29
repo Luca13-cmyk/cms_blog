@@ -89,7 +89,7 @@ function PostDetail({ post }: IProps) {
             className="object-center absolute  object-cover shadow-lg rounded-t-lg lg:rounded-lg"
           />
         </div>
-        <div className="px-4 lg:px-0">
+        <div className="px-4 lg:px-2">
           <div className="flex items-center my-8 w-full">
             <div className="flex items-center mb-4 lg:mb-0 w-full lg:w-auto mr-8">
               <div className="w-[40px] h-[40px] relative">

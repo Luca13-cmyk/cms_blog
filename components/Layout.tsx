@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { Header } from "./";
 
 interface IProps {
@@ -7,6 +8,9 @@ interface IProps {
 function Layout({ children }: IProps) {
   return (
     <>
+      <Head>
+        <title>CMS Blog</title>
+      </Head>
       <Header />
       {children}
     </>
