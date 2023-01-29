@@ -9,11 +9,11 @@ function Author({ author }: IProps) {
   return (
     <div className="text-center mt-20 mb-8 p-12 relative  rounded-lg bg-black bg-opacity-20">
       <div className="absolute  left-4 -top-14">
-        <div className="relative w-[100px] h-[100px]">
+        <div className="relative w-[80px] h-[80px]">
           <Image
             alt={author.name}
             fill
-            className="absolute rounded-full"
+            className="object-cover absolute rounded-full"
             src={author.photo.url}
           />
         </div>

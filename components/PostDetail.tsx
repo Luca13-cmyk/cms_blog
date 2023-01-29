@@ -47,7 +47,7 @@ function PostDetail({ post }: IProps) {
         return (
           <div
             key={index}
-            className="bg-gray-100 p-4 w-full rounded-md whitespace-pre select-all my-4"
+            className="bg-gray-100 p-4 w-full rounded-md whitespace-pre select-all my-4 overflow-x-auto hide-scrollbar"
           >
             <p className="text-gray-800 antialiased font-light text-lg font-serif">
               {modifiedText.map((item: any, i: number) => (
