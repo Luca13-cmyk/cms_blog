@@ -28,7 +28,7 @@ function PostWidget({ categories, slug }: IProps) {
         setRelatedPosts(result);
       }
     } catch (error) {
-      alert("Somenthing went wrong.");
+      console.log(error);
     } finally {
       setLoading(false);
     }

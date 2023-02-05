@@ -18,7 +18,11 @@ function PostDetail({ post }: IProps) {
 
     if (obj) {
       if (obj.bold) {
-        modifiedText = <b key={index}>{text}</b>;
+        modifiedText = (
+          <b className="font-bold" key={index}>
+            {text}
+          </b>
+        );
       }
 
       if (obj.italic) {

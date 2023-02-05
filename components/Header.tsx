@@ -11,7 +11,7 @@ function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    getCategories().then((newCategories: Category[]) =>
+    getCategories(true).then((newCategories: Category[]) =>
       setCategories(newCategories)
     );
   }, []);
@@ -71,7 +71,7 @@ function Header() {
           <MenuButton close />
         </div>
         <div className="flex flex-col w-full justify-start items-start h-full gap-6 overflow-y-scroll hide-scrollbar">
-          <Link href="/">
+          <Link onClick={() => setMenuOpen(false)} href="/">
             <div className="flex justify-between items-center w-full cursor-pointer">
               <Home />
               <span className="mt-2 align-middle text-white ml-4 font-semibold cursor-pointer">
@@ -82,7 +82,11 @@ function Header() {
 
           <hr className="border-gray-700 h-2 w-full" />
           {categories.map((category: Category) => (
-            <Link key={category.slug} href={`/category/${category.slug}`}>
+            <Link
+              key={category.slug}
+              onClick={() => setMenuOpen(false)}
+              href={`/category/${category.slug}`}
+            >
               <div className="flex justify-between items-center w-full">
                 <Go />
                 <span className="mt-2 align-middle text-white ml-4 font-semibold cursor-pointer">

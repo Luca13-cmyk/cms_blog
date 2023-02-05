@@ -200,9 +200,18 @@ export const getSimilarPosts = async (categories: string[], slug: string) => {
   return result.posts;
 };
 
-export const getCategories = async () => {
-  const query = gql`
-    query getCategories {
+export const getCategories = async (all?: boolean) => {
+  const query = all
+    ? gql`
+    query getCategories() {
+      categories() {
+        name
+        slug
+      }
+    }
+  `
+    : gql`
+    query getCategories() {
       categories(last: 4) {
         name
         slug

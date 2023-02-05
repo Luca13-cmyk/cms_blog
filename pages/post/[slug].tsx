@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import {
   Author,
-  Categories,
+  // Categories,
   Comments,
   CommentsForm,
   Loader,
@@ -34,7 +34,7 @@ function PostDetails({ post }: { post: Post }) {
               slug={post.slug}
               categories={post.categories.map((category) => category.slug)}
             />
-            <Categories />
+            {/* <Categories /> */}
           </div>
         </div>
       </div>
