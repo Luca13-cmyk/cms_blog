@@ -65,7 +65,7 @@ function PostCard({ post }: IProps) {
           <span>{moment(post.createdAt).format("MMM DD, YYYY")}</span>
         </div>
       </div>
-      <p className="text-center text-lg text-gray-700 font-normal px-4 lg:px-20 mb-8">
+      <p className="text-center text-lg text-gray-700 font-normal px-4 lg:px-20 mb-8 overflow-x-hidden">
         {post.excerpt}
       </p>
       <div className="text-center">
