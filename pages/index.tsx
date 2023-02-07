@@ -47,7 +47,7 @@ const Home = ({ posts }: IProps) => {
               />
             )}
             <PostWidget />
-            <Categories />
+            {/* <Categories /> */}
           </div>
         </div>
       </div>

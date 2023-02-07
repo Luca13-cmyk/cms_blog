@@ -6,7 +6,7 @@ const graphqlAPI = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT;
 export const getPosts = async () => {
   const query = gql`
     query Posts {
-      postsConnection {
+      postsConnection(first: 100) {
         edges {
           node {
             author {
@@ -117,7 +117,7 @@ export const getPostDetails = async (slug: string) => {
 export const getCategoryPost = async (slug: string) => {
   const query = gql`
     query GetCategoryPost($slug: String!) {
-      postsConnection(where: { categories_some: { slug: $slug } }) {
+      postsConnection(where: { categories_some: { slug: $slug } }, first: 100) {
         edges {
           cursor
           node {
@@ -204,7 +204,7 @@ export const getCategories = async (all?: boolean) => {
   const query = all
     ? gql`
     query getCategories() {
-      categories() {
+      categories(first: 20) {
         name
         slug
       }
