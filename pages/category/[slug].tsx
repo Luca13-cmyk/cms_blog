@@ -18,7 +18,7 @@ const CategoryPost = ({ posts }: IProps) => {
 
   // pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 2;
+  const postsPerPage = 6;
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;

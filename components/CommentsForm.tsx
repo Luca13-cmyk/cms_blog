@@ -10,6 +10,7 @@ interface IProps {
 function CommentsForm({ slug }: IProps) {
   const [error, setError] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const commentEl = useRef<HTMLTextAreaElement>(null);
   const nameEl = useRef<HTMLInputElement>(null);
@@ -52,8 +53,11 @@ function CommentsForm({ slug }: IProps) {
       removeName();
     }
 
+    setLoading(true);
+
     submitComment(commentObj).then((res) => {
       setShowSuccessMessage(true);
+      setLoading(false);
 
       setTimeout(() => {
         setShowSuccessMessage(false);
@@ -110,16 +114,17 @@ function CommentsForm({ slug }: IProps) {
       {error && (
         <p className="text-xs text-red-500">All fields are required.</p>
       )}
-      <div className="mt-8 ">
+      <div className="mt-8 flex flex-col md:flex-row justify-between">
         <button
           className="transition duration-500 ease hover:bg-indigo-900 inline-block bg-pink-600 text-lg rounded-full text-white px-8 py-3 cursor-pointer"
           type="button"
+          disabled={loading}
           onClick={handleCommentSubmission}
         >
           Post Comment
         </button>
         {showSuccessMessage && (
-          <span className="text-xl float-right font-semibold mt-3 text-green-500">
+          <span className="text-xl font-semibold mt-3 text-green-500">
             Comment submitted for review
           </span>
         )}

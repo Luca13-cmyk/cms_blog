@@ -37,7 +37,7 @@ function PostDetail({ post }: IProps) {
           <a
             className="underline text-xl"
             key={index}
-            target={obj.openInNewTab && "_blank"}
+            target={obj.openInNewTab ? "_blank" : undefined}
             href={obj.href}
           >
             {obj.children[0].text || obj.children[0].title}
@@ -51,7 +51,7 @@ function PostDetail({ post }: IProps) {
         return (
           <div
             key={index}
-            className="bg-gray-100 p-4 w-full rounded-md whitespace-pre select-all my-4 overflow-x-auto hide-scrollbar"
+            className="bg-gray-100 p-4 w-full rounded-md whitespace-pre select-all my-4 overflow-x-auto"
           >
             <p className="text-gray-800 antialiased font-light text-lg font-serif">
               {modifiedText.map((item: any, i: number) => (
@@ -112,14 +112,14 @@ function PostDetail({ post }: IProps) {
   };
 
   return (
-    <div className="bg-white shadow-lg rounded-lg lg:p-8 pb-12 mb-8">
+    <div className="bg-white shadow-lg md:rounded-lg lg:p-8 pb-12 mb-8">
       <div className="relative overflow-hidden shadow-md mb-6">
         <div className="relative h-[350px] w-full">
           <Image
             src={post.featuredImage.url}
             alt={post.title}
             fill
-            className="object-center absolute  object-cover shadow-lg rounded-t-lg lg:rounded-lg"
+            className="object-center absolute  object-cover shadow-lg md:rounded-t-lg lg:rounded-lg"
           />
         </div>
         <div className="px-4 lg:px-2">

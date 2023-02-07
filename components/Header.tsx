@@ -4,11 +4,14 @@ import { useEffect, useState } from "react";
 import Category from "../model/Category";
 import { getCategories } from "../services";
 
-import { Go, Home, Menu } from "../assets";
+import { Go, Home, Menu, Search } from "../assets";
+import SearchMenu from "./Search";
+import useSearchStore from "../store/searchStore";
 
 function Header() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { searchOpen, toggleSearch } = useSearchStore();
 
   useEffect(() => {
     getCategories(true).then((newCategories: Category[]) =>
@@ -38,20 +41,35 @@ function Header() {
     </button>
   );
 
+  const SearchButton = ({ phone }: { phone?: boolean }) => (
+    <button
+      type="button"
+      onClick={() => toggleSearch(true)}
+      className={`
+      float-right h-[40px] w-[40px] rounded-full 
+      ${phone ? "bg-black" : "bg-white"}
+      flex items-center justify-center`}
+    >
+      <Search phone={phone} />
+    </button>
+  );
+
   return (
     <>
       {/* PC nav */}
       <nav className="container mx-auto px-10 mb-8 hidden md:block">
         <div className="border-b w-full flex justify-between items-center border-blue-400 py-8">
-          <div className="md:float-left block">
+          <div>
             <Link href="/">
               <span className="cursor-pointer font-bold text-2xl md:text-4xl text-white md:bg-white/25 rounded-md md:py-4 md:px-2">
                 CMS Blog
               </span>
             </Link>
           </div>
-          <div>
+
+          <div className="flex gap-2">
             <MenuButton />
+            <SearchButton />
           </div>
         </div>
       </nav>
@@ -59,6 +77,9 @@ function Header() {
       <nav className="fixed bottom-0 z-10 md:hidden bg-black/40 flex items-center justify-end w-screen h-[40px]">
         <div className="absolute right-2 -top-2">
           <MenuButton phone />
+        </div>
+        <div className="absolute left-2 -top-2">
+          <SearchButton phone />
         </div>
       </nav>
       {/* Sidebar menu */}
@@ -70,7 +91,7 @@ function Header() {
         <div className="hidden md:block">
           <MenuButton close />
         </div>
-        <div className="flex flex-col w-full justify-start items-start h-full gap-6 overflow-y-scroll hide-scrollbar">
+        <div className="flex flex-col w-full justify-start items-start h-full gap-6 overflow-y-scroll">
           <Link onClick={() => setMenuOpen(false)} href="/">
             <div className="flex justify-between items-center w-full cursor-pointer">
               <Home />
@@ -97,6 +118,8 @@ function Header() {
           ))}
         </div>
       </aside>
+      {/* Search menu */}
+      {searchOpen && <SearchMenu />}
     </>
   );
 }

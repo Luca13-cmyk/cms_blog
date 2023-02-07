@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Categories, PostCard, PostWidget, Pagination } from "../components";
+import { PostCard, PostWidget, Pagination, Categories } from "../components";
 import Post from "../model/Post";
 import FeaturedPosts from "../sections/FeaturedPosts";
 import { getPosts } from "../services";
@@ -9,9 +9,9 @@ interface IProps {
 }
 
 const Home = ({ posts }: IProps) => {
-  // pagination
+  // Pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 2;
+  const postsPerPage = 6;
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
@@ -29,15 +29,18 @@ const Home = ({ posts }: IProps) => {
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-12 md:gap-12">
         <div className="lg:col-span-8 col-span-1">
-          {currentPosts.map((data: { node: Post }, index: number) => (
-            <PostCard post={data.node} key={`${data.node.title}_${index}`} />
-          ))}
+          {currentPosts.map(
+            // currentPosts
+            (data: { node: Post }, index: number) => (
+              <PostCard post={data.node} key={`${data.node.title}_${index}`} />
+            )
+          )}
         </div>
         <div className="lg:col-span-4 col-span-1">
           <div className="lg:sticky relative top-8">
             {posts.length > postsPerPage && (
               <Pagination
-                posts={posts}
+                posts={posts} // posts
                 currentPage={currentPage}
                 paginate={paginate}
                 postsPerPage={postsPerPage}
@@ -53,10 +56,12 @@ const Home = ({ posts }: IProps) => {
 };
 
 export const getStaticProps = async () => {
-  const posts = (await getPosts()) || [];
+  const posts: { node: Post }[] = (await getPosts()) || [];
+
+  const shuffledPosts = posts.sort((a, b) => 0.5 - Math.random());
 
   return {
-    props: { posts },
+    props: { posts: shuffledPosts },
     revalidate: 60,
   };
 };
